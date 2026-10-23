@@ -7,8 +7,8 @@
 2. Через минуту сайт будет на `https://<логин>.github.io/<репозиторий>/`.
 3. Свой домен: Settings → Pages → Custom domain (добавится файл `CNAME`), у регистратора CNAME-запись на `<логин>.github.io`.
 
-## Что поменять перед запуском
-- Ссылка на бот `https://t.me/lapmost_bot` временная: замените во всех местах `index.html`.
-- Карточки животных в каталоге — демо-данные в скрипте внизу `index.html`.
+## Ссылки и аналитика
+- Бот: https://t.me/lapmost_bot, канал: https://t.me/lapmostt, ВК: https://vk.ru/club242294598.
+- Яндекс Метрика: счётчик 113753582, код в `<head>` файла `index.html`.
 
 Цвета: #22504A (Хвоя), #F0B45B (Мёд). Шрифты: Nunito, Golos Text (Google Fonts).
