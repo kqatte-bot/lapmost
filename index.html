@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ЛапМост — новый дом для животных без хозяина</title>
 <meta name="description" content="ЛапМост — Телеграм-бот, который помогает животным без хозяина найти новый дом: анкета, проверка кандидатов, временная передержка.">
-<meta name="theme-color" content="#22504A">
+<meta name="theme-color" content="#14382C">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ЛапМост">
@@ -13,252 +13,252 @@
 <meta property="og:locale" content="ru_RU">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Golos+Text:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500&display=swap">
 <style>
-/* Layout: тёплый «мост» из скруглённых арок; крупные спокойные блоки, акцент мёдом только на действиях и датах */
-:root{
-  --forest:#22504A;      /* основной: доверие, природа */
-  --forest-ink:#173833;
-  --honey:#F0B45B;       /* акцент: тепло, действие */
-  --honey-soft:#FBE7C6;
-  --moss:#E3EDE7;        /* мягкая поверхность */
-  --sky:#DDE8EE;
-  --peach:#F7E1D3;
-  --paper:#F6F5F1;       /* фон */
-  --card:#FFFFFF;
-  --ink:#1B2826;         /* текст */
-  --muted:#5A6B67;
-  --line:#D9DFDA;
-  --on-forest:#F6F5F1;
-  --tile-eye:#F6F5F1;
-  --shadow:0 1px 2px rgb(23 56 51 / .06),0 8px 24px rgb(23 56 51 / .08);
-  --display:"Nunito","Arial Rounded MT Bold",system-ui,sans-serif;
-  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --r-lg:28px;--r-md:18px;--r-sm:12px;
-  --wrap:1160px;
+/* Layout: cream page, rounded dark-green blocks alternating with light sections; desktop container 1200px, one column on phones. Single deliberate look (no dark-mode swap). */
+:root {
+  --page: #F3EEE3;
+  --green: #14382C;
+  --green-deep: #0A1612;
+  --on-green: #F4EFE4;
+  --on-green-muted: rgba(244, 239, 228, 0.78);
+  --line-on-green: rgba(244, 239, 228, 0.14);
+  --tile-on-green: rgba(244, 239, 228, 0.07);
+  --pink: #F5C6D4;
+  --pink-soft: #F8DDE5;
+  --paw: #E9A0B6;
+  --ink: #14382C;
+  --ink-muted: #3F5A50;
+  --card: #FBF8F2;
+  --eye: #D8C24A;
+  --nose: #C98A9A;
+  --display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --body: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --radius-block: 28px;
+  --radius-card: 20px;
+  color-scheme: light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --forest:#7CC2B4;--forest-ink:#0F1B19;--honey:#F2BE6E;--honey-soft:#3A2F1E;
-  --moss:#1C2A27;--sky:#1B2529;--peach:#2C2320;--paper:#111917;--card:#18221F;
-  --ink:#E7EDEA;--muted:#9DADA8;--line:#2B3835;--on-forest:#0F1B19;--tile-eye:#18221F;
-  --shadow:0 1px 2px rgb(0 0 0 / .3),0 8px 24px rgb(0 0 0 / .25);color-scheme:dark}}
-:root[data-theme="dark"]{
-  --forest:#7CC2B4;--forest-ink:#0F1B19;--honey:#F2BE6E;--honey-soft:#3A2F1E;
-  --moss:#1C2A27;--sky:#1B2529;--peach:#2C2320;--paper:#111917;--card:#18221F;
-  --ink:#E7EDEA;--muted:#9DADA8;--line:#2B3835;--on-forest:#0F1B19;--tile-eye:#18221F;
-  --shadow:0 1px 2px rgb(0 0 0 / .3),0 8px 24px rgb(0 0 0 / .25);color-scheme:dark}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 24px;
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; border-radius: 8px; }
+.wrap { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 
-*{box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
-h1{font-size:clamp(2.3rem,5.4vw,4rem);font-weight:900}
-h2{font-size:clamp(1.8rem,3.6vw,2.7rem);font-weight:800}
-h3{font-size:1.2rem;font-weight:800}
-p{margin:0}
-a{color:inherit}
-.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:20px}
-section{padding-block:clamp(56px,9vw,104px)}
-.eyebrow{font:600 .8rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--forest);display:inline-flex;gap:8px;align-items:center}
-.eyebrow::before{content:"";width:18px;height:3px;border-radius:2px;background:var(--honey)}
-.lead{font-size:1.15rem;color:var(--muted);max-width:60ch}
-.sec-head{display:grid;align-content:start;gap:14px;margin-bottom:40px;max-width:760px}
-.ico{width:24px;height:24px;flex:none}
-:focus-visible{outline:3px solid var(--honey);outline-offset:3px;border-radius:8px}
+/* type */
+h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-size: clamp(34px, 4.6vw, 54px); line-height: 1.05; }
+h3 { font-size: 20px; line-height: 1.25; letter-spacing: -0.01em; }
+.it { display: block; font-family: var(--display); font-style: italic; font-weight: 400; letter-spacing: 0; line-height: 1.1; font-size: 1.18em; }
+.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.lead { margin: 0; font-size: 18px; line-height: 1.55; max-width: 34em; }
+.head { display: flex; flex-direction: column; gap: 14px; }
+.head.center { align-items: center; text-align: center; }
+
+/* blocks */
+.block { border-radius: var(--radius-block); padding: clamp(28px, 5vw, 64px) clamp(20px, 4.5vw, 56px); }
+.dark { background: var(--green); color: var(--on-green); }
+.dark .it, .dark .eyebrow { color: var(--pink); }
+.dark .lead { color: var(--on-green-muted); }
+.light .eyebrow { color: var(--ink-muted); }
+.light .lead { color: var(--ink-muted); }
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;font:600 1rem/1 var(--body);text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s,background .15s}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--forest);color:var(--on-forest)}
-.btn-honey{background:var(--honey);color:#1B2826}
-.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
-.btn-ghost:hover{border-color:var(--forest)}
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 600; font-size: 16px; transition: transform .15s ease, opacity .15s ease; border: 1.5px solid transparent; }
+.btn:hover { transform: translateY(-1px); }
+.btn-pink { background: var(--pink); color: var(--green); }
+.btn-green { background: var(--green); color: var(--on-green); }
+.btn-ghost { border-color: rgba(244, 239, 228, 0.4); color: var(--on-green); }
+.btn-ghost-ink { border-color: rgba(20, 56, 44, 0.35); color: var(--ink); }
+.btn svg { width: 18px; height: 18px; flex: none; }
 
 /* header */
-header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:24px;height:68px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:900 1.45rem/1 var(--display);color:var(--ink);letter-spacing:-.02em}
-.brand svg{width:38px;height:38px;color:var(--forest)}
-.brand b{color:var(--forest);font-weight:900}
-.top nav{display:flex;gap:22px;margin-left:auto;font-size:.95rem}
-.top nav a{text-decoration:none;color:var(--muted)}
-.top nav a:hover{color:var(--ink)}
-.top .btn{padding:11px 18px;font-size:.92rem}
-.socials{display:flex;gap:6px}
-.socials a{display:grid;place-items:center;width:40px;height:40px;border-radius:999px;color:var(--forest);background:var(--moss);text-decoration:none;transition:background .2s,color .2s}
-.socials a:hover{background:var(--forest);color:var(--on-forest)}
-.socials svg{width:20px;height:20px}
-.top .socials{margin-left:-6px}
-@media (max-width:900px){.top nav{display:none}.top .socials{margin-left:auto}}
-@media (max-width:360px){.top .brand{font-size:1.2rem;gap:6px}.top .brand svg{width:30px;height:30px}.top .btn{padding:10px 14px}}
-@media (max-width:420px){.top .btn span{display:none}.top .wrap{gap:10px}.top .socials{gap:4px}.top .socials a{width:36px;height:36px}.top .socials svg{width:18px;height:18px}}
+.top { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 18px 0; }
+.logo { display: inline-flex; align-items: center; gap: 12px; font-family: var(--body); font-weight: 700; font-size: 25px; line-height: 1; letter-spacing: -0.03em; color: var(--green); }
+.logo svg { width: 31px; height: 29px; flex: none; color: var(--paw); }
+.nav { display: flex; gap: 28px; font-size: 15px; font-weight: 500; }
+.nav a:hover { opacity: .7; }
+.top .btn { min-height: 46px; padding: 0 20px; font-size: 15px; }
 
 /* hero */
-.hero{padding-block:clamp(40px,7vw,88px) clamp(56px,8vw,96px);overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
-.hero-copy{display:grid;gap:24px;min-width:0}
-.hero h1 em{font-style:normal;color:var(--forest);position:relative;z-index:0;white-space:nowrap}
-.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.14em;background:var(--honey);border-radius:99px;z-index:-1}
-.hero .actions{display:flex;flex-wrap:wrap;gap:12px}
-.facts{display:flex;flex-wrap:wrap;gap:10px 22px;color:var(--muted);font-size:.95rem;padding:0;margin:4px 0 0;list-style:none}
-.facts li{display:flex;gap:8px;align-items:center}
-.facts svg{color:var(--forest);width:20px;height:20px}
-.reasons{display:flex;flex-wrap:wrap;gap:8px}
-.reasons span{font-size:.85rem;padding:6px 12px;border-radius:999px;background:var(--moss);color:var(--forest-ink)}
-:root[data-theme="dark"] .reasons span{color:var(--ink)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .reasons span{color:var(--ink)}}
+.hero { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center; padding-bottom: 0; }
+.hero h1 { font-size: clamp(40px, 6.2vw, 76px); line-height: 1.02; }
+.hero h1 .it { color: var(--pink); font-size: 1.12em; }
+.hero .eyebrow { margin-bottom: 22px; }
+.hero .lead { margin-top: 22px; max-width: 30em; }
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
+.facts { list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.facts li { padding: 8px 16px; border: 1px solid var(--line-on-green); border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--on-green-muted); }
+.hero-cat { display: block; width: min(560px, 100%); height: auto; margin-top: 40px; }
 
-/* phone mock */
-.stage{position:relative;display:grid;place-items:center;min-width:0}
-.arch{position:absolute;width:min(440px,100%);aspect-ratio:1/1;border-radius:50% 50% var(--r-lg) var(--r-lg);background:var(--moss);bottom:-20px}
-.phone{position:relative;width:min(320px,100%);background:var(--card);border-radius:36px;padding:14px;box-shadow:var(--shadow);border:1px solid var(--line)}
-.chat-top{display:flex;align-items:center;gap:10px;padding:6px 6px 12px;border-bottom:1px solid var(--line)}
-.chat-top .av{width:36px;height:36px;border-radius:50%;background:var(--forest);display:grid;place-items:center}
-.chat-top .av svg{width:24px;height:24px;color:var(--on-forest)}
-.chat-top b{font-family:var(--display);font-size:1rem;display:block;line-height:1.2}
-.chat-top small{color:var(--muted);font-size:.78rem}
-.chat{display:grid;gap:8px;padding:14px 4px 6px;font-size:.88rem;line-height:1.45}
-.msg{max-width:88%;padding:9px 12px;border-radius:16px 16px 16px 4px;background:var(--moss)}
-.msg.me{justify-self:end;background:var(--forest);color:var(--on-forest);border-radius:16px 16px 4px 16px}
-.progress{display:flex;gap:4px;margin-top:6px}
-.progress i{flex:1;height:4px;border-radius:2px;background:var(--line)}
-.progress i.on{background:var(--honey)}
-.kb{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px}
-.kb span{border:1.5px solid var(--line);border-radius:10px;padding:7px;text-align:center;font-size:.8rem;font-weight:500}
-.photo-msg{display:flex;gap:6px;justify-self:end}
-.photo-msg span{width:58px;height:58px;border-radius:12px;background:var(--peach);display:grid;place-items:center;color:#C98E6A}
-.photo-msg svg{width:42px;height:42px}
-.float-tag{position:absolute;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:.85rem;box-shadow:var(--shadow);font-weight:500}
-.float-tag svg{width:20px;height:20px;color:var(--forest)}
-.float-tag.t1{left:-10px;top:-18px}
-.float-tag.t2{right:-10px;bottom:-18px}
-@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.stage{margin-top:12px}}
-@media (max-width:480px){.float-tag{display:none}}
-
-/* problem */
-.problem{background:var(--card);border-block:1px solid var(--line)}
-.cases{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.case{padding:22px 20px;border-radius:var(--r-md);background:var(--paper);display:grid;gap:8px;align-content:start;min-width:0}
-.case h3{font-size:1.08rem}
-.case p{color:var(--muted);font-size:.95rem}
-.case .dot{width:10px;height:10px;border-radius:50%;background:var(--honey)}
-.problem-note{margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:22px 24px;border-radius:var(--r-md);background:var(--honey-soft);max-width:860px}
-.problem-note svg{width:28px;height:28px;color:var(--forest)}
-@media (max-width:1000px){.cases{grid-template-columns:repeat(2,1fr)}.case:last-child{grid-column:span 2}}
-@media (max-width:520px){.cases{grid-template-columns:1fr}.case:last-child{grid-column:auto}}
+/* why */
+.why-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+.why-card { background: var(--pink-soft); border-radius: var(--radius-card); padding: 22px 20px 24px; display: flex; flex-direction: column; gap: 10px; min-height: 190px; }
+.why-card p { margin: auto 0 0; font-size: 15px; color: var(--ink-muted); line-height: 1.45; }
+.note { margin-top: 14px; background: var(--green); color: var(--on-green); border-radius: var(--radius-card); padding: 22px 28px; font-size: 17px; line-height: 1.5; }
+.note b { color: var(--pink); font-weight: 600; }
 
 /* steps */
-.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
-.step{position:relative;padding:28px 24px 26px;border-radius:var(--r-lg);background:var(--card);border:1px solid var(--line);display:grid;gap:10px;align-content:start;counter-increment:s;min-width:0}
-.step-top{display:flex;justify-content:space-between;align-items:center}
-.step .num{font:900 2.4rem/1 var(--display);color:var(--honey)}
-.step .num::before{content:counter(s)}
-.step .ic{width:46px;height:46px;border-radius:14px;background:var(--moss);display:grid;place-items:center;color:var(--forest)}
-.step p{color:var(--muted);font-size:.97rem}
-.step .who{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--forest)}
-.anketa{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-.anketa span{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
-.anketa svg{width:14px;height:14px;color:var(--forest)}
-@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}}
-@media (max-width:600px){.steps{grid-template-columns:1fr}}
-
+.steps { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: step; }
+.step { background: var(--tile-on-green); border: 1px solid var(--line-on-green); border-radius: var(--radius-card); padding: 24px; display: flex; flex-direction: column; gap: 12px; min-height: 220px; counter-increment: step; }
+.step-top { display: flex; align-items: center; justify-content: space-between; }
+.step-num::before { content: counter(step); font-family: var(--display); font-style: italic; font-size: 44px; line-height: 1; color: var(--pink); }
+.role { font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: var(--pink); color: var(--green); }
+.step h3 { margin-top: auto; }
+.step p { margin: 0; color: var(--on-green-muted); font-size: 15px; line-height: 1.45; }
 
 /* candidates */
-.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.split>*{min-width:0}
-.checklist{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:14px}
-.checklist li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
-.checklist .ic{width:40px;height:40px;border-radius:12px;background:var(--moss);display:grid;place-items:center;color:var(--forest)}
-.checklist b{display:block;font-weight:600}
-.checklist span{color:var(--muted);font-size:.95rem}
-.form-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--shadow);display:grid;gap:16px}
-.form-card header{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.form-card header small{color:var(--muted)}
-.field{display:grid;gap:6px}
-.field label{font-size:.85rem;font-weight:600}
-.input{padding:12px 14px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--paper);font:400 .95rem var(--body);color:var(--ink);width:100%}
-.match{display:flex;gap:12px;align-items:center;padding:14px;border-radius:var(--r-md);background:var(--honey-soft)}
-.match .ring{width:52px;height:52px;border-radius:50%;flex:none;display:grid;place-items:center;font:900 1rem var(--display);background:conic-gradient(var(--forest) 0 86%,var(--line) 0);position:relative}
-.match .ring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--honey-soft)}
-.match .ring b{position:relative}
-.match p{font-size:.9rem}
-@media (max-width:900px){.split{grid-template-columns:1fr;gap:36px}}
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 48px; align-items: center; }
+.split .btn { margin-top: 28px; align-self: flex-start; }
+.split-text { display: flex; flex-direction: column; }
+.split-text .lead { margin-top: 18px; }
+.pink-card { position: relative; overflow: hidden; background: var(--pink); border-radius: var(--radius-block); padding: 32px 32px 0; }
+.check { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; position: relative; z-index: 1; max-width: 330px; counter-reset: c; }
+.check li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 2px 14px; counter-increment: c; }
+.check li::before { content: counter(c); grid-row: span 2; width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: var(--pink); display: grid; place-items: center; font-weight: 700; font-size: 15px; }
+.check b { font-size: 17px; font-weight: 600; }
+.check span { font-size: 15px; color: var(--ink-muted); line-height: 1.45; }
+.pink-card .dog { display: block; width: 220px; height: auto; margin: -40px 0 0 auto; color: var(--green); }
 
 /* foster */
-.foster{background:var(--card);border-block:1px solid var(--line)}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.panel{border-radius:var(--r-lg);padding:32px;display:grid;gap:16px;align-content:start;min-width:0}
-.panel.a{background:var(--sky)}
-.panel.b{background:var(--peach)}
-.panel .ic{width:52px;height:52px;border-radius:16px;background:var(--card);display:grid;place-items:center;color:var(--forest)}
-.panel ul{margin:0;padding-left:20px;display:grid;gap:6px}
-.panel .btn{justify-self:start;margin-top:6px}
-@media (max-width:800px){.duo{grid-template-columns:1fr}.panel{padding:24px}}
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
+.duo-card { border-radius: var(--radius-block); padding: 32px; display: flex; flex-direction: column; gap: 18px; }
+.duo-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.duo-card li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; font-size: 16px; line-height: 1.45; }
+.duo-card li::before { content: ""; width: 8px; height: 8px; margin: 8px 0 0 4px; border-radius: 50%; background: currentColor; opacity: .55; }
+.duo-card .btn { margin-top: auto; align-self: flex-start; }
+.duo-card.dark h3 { color: var(--on-green); }
+.duo-card.dark li { color: var(--on-green-muted); }
+.duo-card.pinky { background: var(--pink); color: var(--ink); }
+.duo-card h3 { font-size: 26px; }
 
-/* follow-up timeline */
-.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;margin-top:8px}
-.timeline::before{content:"";position:absolute;left:8%;right:8%;top:30px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--forest),var(--honey))}
-.tl{display:grid;align-content:start;gap:12px;justify-items:center;text-align:center;padding-inline:14px;position:relative}
-.tl .day{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:4px solid var(--forest);font:900 1.05rem/1 var(--display);color:var(--forest);font-variant-numeric:tabular-nums}
-.tl:nth-child(2) .day{border-color:color-mix(in srgb,var(--forest) 50%,var(--honey))}
-.tl:nth-child(3) .day{border-color:var(--honey);color:var(--ink)}
-.tl .when{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.tl p{color:var(--muted);font-size:.95rem;max-width:30ch}
-.safety-net{margin-top:40px;padding:22px 26px;border-radius:var(--r-md);border:1.5px dashed var(--forest);display:flex;gap:16px;align-items:center;max-width:860px;margin-inline:auto}
-.safety-net svg{width:28px;height:28px;color:var(--forest)}
-@media (max-width:760px){
-  .timeline{grid-template-columns:1fr;gap:28px}
-  .timeline::before{left:30px;right:auto;top:20px;bottom:20px;width:4px;height:auto;background:linear-gradient(180deg,var(--forest),var(--honey))}
-  .tl{grid-template-columns:64px 1fr;justify-items:start;text-align:left;column-gap:18px;row-gap:4px;padding:0}
-  .tl .day{grid-row:span 3}
-}
+/* after */
+.timeline { list-style: none; margin: 52px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 16.6%; right: 16.6%; top: 36px; height: 2px; background: var(--line-on-green); }
+.tl { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; position: relative; }
+.day { width: 72px; height: 72px; border-radius: 50%; background: var(--pink); color: var(--green); display: grid; place-items: center; font-family: var(--display); font-style: italic; font-size: 30px; line-height: 1; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+.tl small { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--pink); }
+.tl p { margin: 0; color: var(--on-green-muted); font-size: 15px; max-width: 18em; }
+.safety { margin: 44px auto 0; max-width: 760px; display: flex; gap: 16px; align-items: flex-start; padding: 20px 24px; border-radius: var(--radius-card); background: var(--tile-on-green); border: 1px solid var(--line-on-green); color: var(--on-green); font-size: 16px; }
+.safety svg { flex: none; width: 24px; height: 24px; color: var(--pink); margin-top: 1px; }
 
 /* trust */
-.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.trust{padding:24px;border-radius:var(--r-md);background:var(--card);border:1px solid var(--line);display:grid;gap:10px;align-content:start;min-width:0}
-.trust svg{width:30px;height:30px;color:var(--forest)}
-.trust p{font-size:.95rem;color:var(--muted)}
-@media (max-width:1000px){.trust-grid{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.trust-grid{grid-template-columns:1fr}}
+.trust-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+.trust-card { background: var(--card); border-radius: var(--radius-card); padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+.ico { width: 52px; height: 52px; border-radius: 14px; background: var(--green); display: grid; place-items: center; margin-bottom: 8px; }
+.ico svg { width: 26px; height: 26px; color: var(--pink); }
+.trust-card p { margin: 0; font-size: 15px; color: var(--ink-muted); line-height: 1.45; }
 
 /* faq */
-.faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px}
-.faq-wrap>*{min-width:0}
-details{border-bottom:1px solid var(--line)}
-details:first-child{border-top:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 0;font:800 1.08rem/1.35 var(--display)}
-summary::-webkit-details-marker{display:none}
-summary svg{width:22px;height:22px;flex:none;color:var(--forest);transition:transform .2s}
-details[open] summary svg{transform:rotate(45deg)}
-details p{padding:0 0 22px;color:var(--muted);max-width:62ch}
-@media (max-width:860px){.faq-wrap{grid-template-columns:1fr;gap:24px}}
+.faq { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 48px; align-items: start; }
+.faq .lead { margin-top: 18px; }
+.faq-list { display: flex; flex-direction: column; }
+details { border-bottom: 1px solid rgba(20, 56, 44, 0.16); }
+details:first-child { border-top: 1px solid rgba(20, 56, 44, 0.16); }
+summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 18px; font-weight: 600; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--pink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2314382C' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center / 16px no-repeat; transition: transform .2s ease; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { margin: 0 0 22px; color: var(--ink-muted); font-size: 16px; max-width: 36em; }
 
 /* cta */
-.cta{padding-block:0 clamp(56px,9vw,104px)}
-.cta-box{background:var(--forest);color:var(--on-forest);border-radius:40px;padding:clamp(32px,6vw,64px);display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center;position:relative;overflow:hidden}
-.cta-box>*{min-width:0;position:relative}
-.cta-box h2{color:var(--on-forest)}
-.cta-box p{opacity:.85;margin-top:14px;max-width:52ch}
-.cta-box .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.cta-box .btn-ghost{color:var(--on-forest);border-color:color-mix(in srgb,var(--on-forest) 40%,transparent)}
-.cta-mark{justify-self:center;width:min(220px,60%);color:color-mix(in srgb,var(--on-forest) 92%,transparent)}
-.cta-mark svg{width:100%;height:auto}
-.handle{display:inline-flex;gap:8px;align-items:center;margin-top:18px;font-weight:600;padding:8px 14px;border-radius:999px;background:color-mix(in srgb,var(--on-forest) 12%,transparent)}
-.handle svg{width:18px;height:18px}
-@media (max-width:800px){.cta-box{grid-template-columns:1fr;border-radius:28px}.cta-mark{display:none}}
+.cta { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; align-items: end; overflow: hidden; padding-bottom: 0; }
+.cta-text { padding-bottom: clamp(28px, 5vw, 64px); display: flex; flex-direction: column; }
+.cta .lead { margin-top: 18px; }
+.cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.handle { display: inline-flex; align-items: center; min-height: 52px; padding: 0 20px; border-radius: 999px; border: 1.5px dashed rgba(244, 239, 228, 0.4); font-weight: 600; user-select: all; }
+.pets { display: flex; align-items: flex-end; justify-content: center; gap: 0; }
+.pets svg { width: 50%; max-width: 230px; height: auto; color: var(--green-deep); }
 
 /* footer */
-footer{border-top:1px solid var(--line);padding-block:40px 32px;font-size:.92rem;color:var(--muted)}
-.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px}
-.foot h4{font:800 .95rem var(--display);color:var(--ink);margin:0 0 12px}
-.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-.foot a{text-decoration:none}
-.foot a:hover{color:var(--ink)}
-.foot .brand{margin-bottom:12px}
-.foot-socials{margin-top:16px}
-.legal{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.85rem}
-@media (max-width:800px){.foot{grid-template-columns:1fr 1fr}.foot>div:first-child{grid-column:1/-1}}
+.foot { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 32px; padding: 40px 8px 8px; font-size: 15px; }
+.foot p { margin: 12px 0 0; color: var(--ink-muted); max-width: 22em; }
+.foot h4 { margin: 4px 0 12px; font-size: 15px; font-weight: 700; }
+.foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; color: var(--ink-muted); }
+.foot a:hover { color: var(--ink); }
 
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* tablet */
+@media (max-width: 1020px) {
+  .nav { display: none; }
+  .why-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trust-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .foot { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .foot > div:first-child { grid-column: 1 / -1; }
+}
+/* phone */
+@media (max-width: 680px) {
+  body { font-size: 15px; }
+  .logo { font-size: 22px; }
+  .top .btn { min-height: 44px; padding: 0 16px; font-size: 14px; }
+  .lead { font-size: 16px; }
+  .hero-actions { flex-direction: column; align-self: stretch; }
+  .facts { flex-direction: column; align-items: center; }
+  .hero-cat { margin-top: 28px; }
+  .why-grid, .steps, .trust-grid, .duo, .split, .faq, .cta, .timeline { grid-template-columns: minmax(0, 1fr); }
+  .why-card { min-height: 0; }
+  .why-card p { margin-top: 0; }
+  .step { min-height: 0; }
+  .step h3 { margin-top: 6px; }
+  .split, .faq { gap: 28px; }
+  .split .btn { align-self: stretch; }
+  .pink-card { padding: 24px 22px 0; }
+  .pink-card .dog { width: 170px; margin-top: -10px; }
+  .duo-card { padding: 24px 22px; }
+  .duo-card .btn { align-self: stretch; }
+  .timeline { gap: 28px; }
+  .timeline::before { left: 36px; right: auto; top: 36px; bottom: 36px; width: 2px; height: auto; }
+  .tl { display: grid; grid-template-columns: 72px minmax(0, 1fr); text-align: left; align-items: start; gap: 2px 16px; }
+  .tl .day { grid-row: span 3; margin: 0; }
+  .safety { padding: 18px; }
+  .cta { gap: 0; }
+  .cta-text { padding-bottom: 8px; }
+  .cta-actions .btn, .handle { width: 100%; justify-content: center; }
+  .foot { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-inline: 4px; }
+}
+
+body { margin: 0; }
+img { max-width: 100%; }
+
+/* header: socials + burger */
+.top-right { display: flex; align-items: center; gap: 8px; }
+.socials { display: flex; gap: 6px; }
+.socials a { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--pink-soft); color: var(--green); transition: background .2s, color .2s; }
+.socials a:hover { background: var(--green); color: var(--pink); }
+.socials svg { width: 20px; height: 20px; }
+.burger { display: none; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--green); color: var(--on-green); cursor: pointer; place-items: center; padding: 0; }
+.burger svg { width: 22px; height: 22px; }
+.burger .i-close { display: none; }
+.burger[aria-expanded="true"] .i-open { display: none; }
+.burger[aria-expanded="true"] .i-close { display: block; }
+.menu { display: none; }
+.foot-socials { margin-top: 16px; }
+.legal { grid-column: 1 / -1; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 20px; border-top: 1px solid rgba(20, 56, 44, 0.14); color: var(--ink-muted); font-size: 14px; }
+@media (max-width: 1020px) {
+  .top-right .socials { display: none; }
+  .burger { display: grid; }
+  .menu { position: absolute; left: 0; right: 0; top: calc(100% + 10px); z-index: 20; background: var(--green); color: var(--on-green); border-radius: 24px; padding: 20px; flex-direction: column; gap: 6px; box-shadow: 0 18px 40px rgba(10, 22, 18, 0.25); }
+  .menu.open { display: flex; }
+  .menu > a:not(.btn) { padding: 12px 8px; font-size: 18px; font-weight: 600; border-bottom: 1px solid var(--line-on-green); }
+  .menu .btn { margin-top: 14px; }
+  .menu .socials { margin-top: 12px; }
+  .menu .socials a { background: var(--tile-on-green); color: var(--on-green); }
+  .top { position: relative; }
+}
+@media (max-width: 680px) {
+  .top-right > .btn { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -277,353 +277,262 @@ footer{border-top:1px solid var(--line);padding-block:40px 32px;font-size:.92rem
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="logo" viewBox="0 0 64 64">
-      <g fill="var(--logo-fill, currentColor)">
-        <ellipse cx="13.5" cy="27" rx="5.2" ry="6.6" transform="rotate(-24 13.5 27)"/>
-        <ellipse cx="25" cy="16.5" rx="5.4" ry="7" transform="rotate(-8 25 16.5)"/>
-        <ellipse cx="39" cy="16.5" rx="5.4" ry="7" transform="rotate(8 39 16.5)"/>
-        <ellipse cx="50.5" cy="27" rx="5.2" ry="6.6" transform="rotate(24 50.5 27)"/>
-        <path d="M10 53C10 39 19.5 31 32 31S54 39 54 53a4 4 0 0 1-4 4h-4.5a4 4 0 0 1-4-4c0-6-4-10-9.5-10s-9.5 4-9.5 10a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4Z"/>
-      </g>
-      <path d="M6 59.5h52" stroke="var(--honey)" stroke-width="3" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="cat" viewBox="0 0 120 120">
-      <path d="M28 58 32 18l26 24Z M92 58 88 18 62 42Z" fill="currentColor"/>
-      <ellipse cx="60" cy="72" rx="37" ry="32" fill="currentColor"/>
-      <ellipse cx="46" cy="68" rx="4.5" ry="6.5" style="fill:var(--tile-eye)"/>
-      <ellipse cx="74" cy="68" rx="4.5" ry="6.5" style="fill:var(--tile-eye)"/>
-      <path d="M55 81h10l-5 5Z" style="fill:var(--tile-eye)"/>
-    </symbol>
-    <symbol id="dog" viewBox="0 0 120 120">
-      <ellipse cx="60" cy="64" rx="31" ry="35" fill="currentColor"/>
-      <ellipse cx="29" cy="58" rx="12" ry="26" transform="rotate(18 29 58)" fill="currentColor" opacity=".7"/>
-      <ellipse cx="91" cy="58" rx="12" ry="26" transform="rotate(-18 91 58)" fill="currentColor" opacity=".7"/>
-      <ellipse cx="60" cy="86" rx="17" ry="13" style="fill:var(--tile-eye)" opacity=".35"/>
-      <circle cx="49" cy="60" r="4.5" style="fill:var(--tile-eye)"/>
-      <circle cx="71" cy="60" r="4.5" style="fill:var(--tile-eye)"/>
-      <ellipse cx="60" cy="80" rx="6.5" ry="4.5" style="fill:var(--tile-eye)"/>
-    </symbol>
-    <symbol id="rabbit" viewBox="0 0 120 120">
-      <ellipse cx="47" cy="34" rx="9" ry="27" transform="rotate(-8 47 34)" fill="currentColor"/>
-      <ellipse cx="73" cy="34" rx="9" ry="27" transform="rotate(8 73 34)" fill="currentColor"/>
-      <ellipse cx="60" cy="80" rx="31" ry="28" fill="currentColor"/>
-      <circle cx="49" cy="76" r="4" style="fill:var(--tile-eye)"/>
-      <circle cx="71" cy="76" r="4" style="fill:var(--tile-eye)"/>
-      <path d="M56 87h8l-4 4Z" style="fill:var(--tile-eye)"/>
-    </symbol>
-    
-    <symbol id="i-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 3h6v3H9zM8.5 11h7M8.5 14.5h7M8.5 18h4"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6Z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></symbol>
-    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><path d="M16.5 13.5v6M13.5 16.5h6"/></symbol>
-    <symbol id="i-people" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3.3"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="16.8" cy="9.3" r="2.6"/><path d="M15.6 14.4c2.6-.3 4.5 1.4 5 4.4"/></symbol>
-    <symbol id="i-meet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.4-7.5-10A4.2 4.2 0 0 1 12 7.6 4.2 4.2 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10Z"/></symbol>
-    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.5Z"/><path d="M14 3.5v5h5M8.5 13h7M8.5 16.5c1-1.2 1.8-1.2 2.4 0s1.5 1.2 2.3 0"/></symbol>
-    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M8 3v4M16 3v4M4 10h16M9 15l2 2 4-4"/></symbol>
-    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19Z"/><path d="M12 17.5s-3.2-1.9-3.2-4.2a1.7 1.7 0 0 1 3.2-.8 1.7 1.7 0 0 1 3.2.8c0 2.3-3.2 4.2-3.2 4.2Z"/></symbol>
-    <symbol id="i-hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3l4.5 1.5h3a1.5 1.5 0 0 1 0 3H10M6 20.5H3M13.5 18.5l5.2-2.2a1.6 1.6 0 0 1 1.3 2.9L13 22l-7-1.5"/><path d="M14.5 11s-3.5-2-3.5-4.5a2 2 0 0 1 3.5-1.3A2 2 0 0 1 18 6.5c0 2.5-3.5 4.5-3.5 4.5Z"/></symbol>
-    <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5a2 2 0 0 1 2-2h2l1.5-2h5l1.5 2h2a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><circle cx="12" cy="13" r="3.5"/></symbol>
-    <symbol id="i-pass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M12 8v5M9.5 10.5h5M9 17h6"/></symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></symbol>
-    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5M12 14.5v2.5"/></symbol>
-    <symbol id="i-tg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3.5 11l6 2.2L18 7l-6.6 7.4L17.5 20Z"/><path d="M9.5 13.2V19l2.6-3"/></symbol>
+    <symbol id="paw" viewBox="0 0 30.8 28.61"><g fill="currentColor"><path transform="matrix(0.91355 -0.40674 0.40674 0.91355 0 8.47224)" d="M3.0875 7.8375C4.79268 7.8375 6.175 6.08302 6.175 3.91875C6.175 1.75448 4.79268 0 3.0875 0C1.38232 0 0 1.75448 0 3.91875C0 6.08302 1.38232 7.8375 3.0875 7.8375Z"/><path transform="matrix(0.99027 -0.13917 0.13917 0.99027 7.4891 0.89245)" d="M3.20625 8.3125C4.97701 8.3125 6.4125 6.45168 6.4125 4.15625C6.4125 1.86082 4.97701 0 3.20625 0C1.43549 0 0 1.86082 0 4.15625C0 6.45168 1.43549 8.3125 3.20625 8.3125Z"/><path transform="matrix(0.99027 0.13917 -0.13917 0.99027 16.95848 0)" d="M3.20625 8.3125C4.97701 8.3125 6.4125 6.45168 6.4125 4.15625C6.4125 1.86082 4.97701 0 3.20625 0C1.43549 0 0 1.86082 0 4.15625C0 6.45168 1.43549 8.3125 3.20625 8.3125Z"/><path transform="matrix(0.91355 0.40674 -0.40674 0.91355 25.1565 5.96067)" d="M3.0875 7.8375C4.79268 7.8375 6.175 6.08302 6.175 3.91875C6.175 1.75448 4.79268 0 3.0875 0C1.38232 0 0 1.75448 0 3.91875C0 6.08302 1.38232 7.8375 3.0875 7.8375Z"/><path transform="translate(2.33634 13.1714)" d="M0 13.0625C0 4.75 5.64062 0 13.0625 0C20.4844 0 26.125 4.75 26.125 13.0625C26.125 13.6924 25.8748 14.2965 25.4294 14.7419C24.984 15.1873 24.3799 15.4375 23.75 15.4375L21.0781 15.4375C20.4482 15.4375 19.8441 15.1873 19.3987 14.7419C18.9533 14.2965 18.7031 13.6924 18.7031 13.0625C18.7031 9.5 16.3281 7.125 13.0625 7.125C9.79688 7.125 7.42188 9.5 7.42188 13.0625C7.42188 13.6924 7.17165 14.2965 6.72625 14.7419C6.28085 15.1873 5.67676 15.4375 5.04688 15.4375L2.375 15.4375C1.74511 15.4375 1.14102 15.1873 0.695621 14.7419C0.250222 14.2965 0 13.6924 0 13.0625Z"/></g></symbol>
+    <symbol id="cat-head" viewBox="0 0 200 160"><polygon points="40,100 56,18 106,66" fill="currentColor"/><polygon points="160,100 144,18 94,66" fill="currentColor"/><ellipse cx="100" cy="128" rx="76" ry="70" fill="currentColor"/><ellipse cx="74" cy="112" rx="14" ry="12" fill="#D8C24A"/><ellipse cx="126" cy="112" rx="14" ry="12" fill="#D8C24A"/><ellipse cx="74" cy="113" rx="3.5" ry="9" fill="#050907"/><ellipse cx="126" cy="113" rx="3.5" ry="9" fill="#050907"/><circle cx="79" cy="107" r="2.6" fill="#FFFFFF"/><circle cx="131" cy="107" r="2.6" fill="#FFFFFF"/><path d="M94 134 L106 134 L100 141 Z" fill="#C98A9A"/></symbol>
+    <symbol id="dog-head" viewBox="0 0 200 160"><path d="M58 160 L142 160 L132 128 L68 128 Z" fill="currentColor"/><ellipse cx="100" cy="82" rx="54" ry="58" fill="currentColor"/><path d="M54 50 C 24 60, 18 118, 40 138 C 56 130, 62 100, 64 70 Z" fill="#0A1612"/><path d="M146 50 C 176 60, 182 118, 160 138 C 144 130, 138 100, 136 70 Z" fill="#0A1612"/><ellipse cx="100" cy="122" rx="30" ry="24" fill="#24493C"/><ellipse cx="100" cy="110" rx="12" ry="8" fill="#050907"/><circle cx="80" cy="76" r="6.5" fill="#F4EFE4"/><circle cx="120" cy="76" r="6.5" fill="#F4EFE4"/><circle cx="80" cy="74" r="3.5" fill="#050907"/><circle cx="120" cy="74" r="3.5" fill="#050907"/></symbol>
+    <symbol id="tg" viewBox="0 0 24 24"><path d="M22 2 11 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2 15 22l-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-vk" viewBox="0 0 24 24" fill="currentColor"><path d="M12.9 17.6c-5.5 0-8.7-3.8-8.8-10.1h2.8c.1 4.6 2.1 6.6 3.7 7V7.5h2.6v4c1.6-.2 3.3-2 3.9-4h2.6c-.4 2.5-2.3 4.3-3.6 5 1.3.6 3.4 2.2 4.2 5.1h-2.9c-.6-1.9-2.2-3.4-4.2-3.6v3.6Z"/></symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-    <symbol id="i-health" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-4 3 8 2-4h7"/></symbol>
-    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
   </defs>
 </svg>
 
-
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="ЛапМост, на главную"><svg aria-hidden="true"><use href="#logo"/></svg><span>Лап<b>Мост</b></span></a>
-    <nav aria-label="Разделы">
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#top" aria-label="ЛапМост, на главную"><svg aria-hidden="true"><use href="#paw"/></svg>ЛапМост</a>
+    <nav class="nav" aria-label="Основное меню">
       <a href="#how">Как это работает</a>
-      <a href="#adopt">Взять питомца</a>
+      <a href="#take">Взять питомца</a>
       <a href="#foster">Передержка</a>
       <a href="#faq">Вопросы</a>
     </nav>
-    <div class="socials">
-      <a href="https://vk.ru/club242294598" target="_blank" rel="noopener" aria-label="ЛапМост во ВКонтакте" title="ВКонтакте"><svg aria-hidden="true"><use href="#i-vk"/></svg></a>
-      <a href="https://t.me/lapmostt" target="_blank" rel="noopener" aria-label="Телеграм-канал ЛапМост" title="Телеграм-канал"><svg aria-hidden="true"><use href="#i-tg"/></svg></a>
-    </div>
-    <a class="btn btn-primary" href="https://t.me/lapmost_bot"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg><span>Открыть бот</span></a>
-  </div>
-</header>
-
-<main id="top">
-  <!-- 1. Первый экран -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-copy">
-        <span class="eyebrow">Телеграм-бот для передачи питомцев</span>
-        <h1>Мост между питомцем и&nbsp;<em>новым домом</em></h1>
-        <p class="lead">Когда хозяин больше не может заботиться о животном, ЛапМост помогает быстро и безопасно найти ему новую семью или временную передержку.</p>
-        <div class="reasons" aria-label="Когда мы помогаем">
-          <span>Смерть владельца</span><span>Болезнь</span><span>Госпитализация</span><span>Исчезновение</span><span>Срочный переезд</span>
-        </div>
-        <div class="actions">
-          <a class="btn btn-primary" href="https://t.me/lapmost_bot"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg>Передать питомца</a>
-          <a class="btn btn-ghost" href="#adopt">Найти питомца<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </div>
-        <ul class="facts">
-          <li><svg aria-hidden="true"><use href="#i-form"/></svg>Анкета за 2–5 минут</li>
-          <li><svg aria-hidden="true"><use href="#i-shield"/></svg>Модерация каждой карточки</li>
-          <li><svg aria-hidden="true"><use href="#i-cal"/></svg>Проверки через 2 недели и 3 месяца</li>
-        </ul>
+    <div class="top-right">
+      <div class="socials">
+        <a href="https://vk.ru/club242294598" target="_blank" rel="noopener" aria-label="ЛапМост во ВКонтакте" title="ВКонтакте"><svg aria-hidden="true"><use href="#i-vk"/></svg></a>
+        <a href="https://t.me/lapmostt" target="_blank" rel="noopener" aria-label="Телеграм-канал ЛапМост" title="Телеграм-канал"><svg aria-hidden="true"><use href="#tg"/></svg></a>
       </div>
-      <div class="stage" aria-hidden="true">
-        <div class="arch"></div>
-        <div class="phone">
-          <div class="chat-top">
-            <div class="av"><svg><use href="#logo" style="--honey:var(--on-forest)"/></svg></div>
-            <div><b>ЛапМост</b><small>бот</small></div>
-          </div>
-          <div class="chat">
-            <div class="msg">Расскажите о питомце. Это займёт пару минут.
-              <div class="progress"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
-            </div>
-            <div class="msg">Шаг 3 из 6. Пришлите 2–3 фото, где хорошо видно мордочку.</div>
-            <div class="photo-msg"><span><svg><use href="#cat"/></svg></span><span style="background:var(--sky);color:#4E6F82"><svg><use href="#cat"/></svg></span></div>
-            <div class="msg">Как Муся относится к детям и другим животным?</div>
-            <div class="kb"><span>Любит детей</span><span>Ладит с кошками</span><span>Боится собак</span><span>Не знаю</span></div>
-          </div>
-        </div>
-        <div class="float-tag t1"><svg><use href="#i-pass"/></svg>Ветпаспорт загружен</div>
-        <div class="float-tag t2"><svg><use href="#i-shield"/></svg>Карточка на модерации</div>
-      </div>
+      <a class="btn btn-green" href="https://t.me/lapmost_bot"><svg aria-hidden="true"><use href="#tg"/></svg>Открыть бот</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Открыть меню">
+        <svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
     </div>
-  </section>
+    <nav class="menu" id="menu" aria-label="Мобильное меню">
+      <a href="#how">Как это работает</a>
+      <a href="#take">Взять питомца</a>
+      <a href="#foster">Передержка</a>
+      <a href="#trust">Безопасность</a>
+      <a href="#faq">Вопросы</a>
+      <a class="btn btn-pink" href="https://t.me/lapmost_bot"><svg aria-hidden="true"><use href="#tg"/></svg>Открыть бот</a>
+      <div class="socials">
+        <a href="https://vk.ru/club242294598" target="_blank" rel="noopener" aria-label="ЛапМост во ВКонтакте" title="ВКонтакте"><svg aria-hidden="true"><use href="#i-vk"/></svg></a>
+        <a href="https://t.me/lapmostt" target="_blank" rel="noopener" aria-label="Телеграм-канал ЛапМост" title="Телеграм-канал"><svg aria-hidden="true"><use href="#tg"/></svg></a>
+      </div>
+    </nav>
+  </header>
 
-  <!-- 2. Проблема -->
-  <section class="problem" id="problem">
-    <div class="wrap">
-      <div class="sec-head">
+  <main class="wrap" id="top">
+    <!-- 1. Hero -->
+    <section class="block dark hero" aria-labelledby="hero-title">
+      <span class="eyebrow">Телеграм-бот для передачи питомцев</span>
+      <h1 id="hero-title">Мост между питомцем <span class="it">и новым домом</span></h1>
+      <p class="lead">Когда хозяин больше не может заботиться о животном, мы быстро и безопасно находим ему новую семью или передержку.</p>
+      <div class="hero-actions">
+        <a class="btn btn-pink" href="https://t.me/lapmost_bot"><svg aria-hidden="true"><use href="#tg"/></svg>Передать питомца</a>
+        <a class="btn btn-ghost" href="#take">Найти питомца</a>
+      </div>
+      <ul class="facts">
+        <li>Анкета за 2–5 минут</li>
+        <li>Модерация каждой карточки</li>
+        <li>Проверки через 2 недели и 3 месяца</li>
+      </ul>
+      <svg class="hero-cat" role="img" aria-label="Чёрная кошка выглядывает снизу" viewBox="0 0 600 268">
+        <polygon points="118,178 148,18 268,118" fill="#0A1612"/>
+        <polygon points="482,178 452,18 332,118" fill="#0A1612"/>
+        <polygon points="150,150 160,62 232,124" fill="#20302A"/>
+        <polygon points="450,150 440,62 368,124" fill="#20302A"/>
+        <ellipse cx="300" cy="320" rx="236" ry="222" fill="#0A1612"/>
+        <ellipse cx="220" cy="210" rx="46" ry="40" fill="#D8C24A"/>
+        <ellipse cx="380" cy="210" rx="46" ry="40" fill="#D8C24A"/>
+        <ellipse cx="220" cy="213" rx="10" ry="31" fill="#050907"/>
+        <ellipse cx="380" cy="213" rx="10" ry="31" fill="#050907"/>
+        <circle cx="234" cy="196" r="7" fill="#FFFFFF"/>
+        <circle cx="394" cy="196" r="7" fill="#FFFFFF"/>
+        <path d="M286 258 L314 258 L300 268 Z" fill="#C98A9A"/>
+        <path d="M250 252 L96 236 M250 260 L92 262 M350 252 L504 236 M350 260 L508 262" stroke="rgba(244,239,228,0.35)" stroke-width="1.5" fill="none"/>
+      </svg>
+    </section>
+
+    <!-- 2. Почему это важно -->
+    <section class="block light" id="why" aria-labelledby="why-title">
+      <div class="head">
         <span class="eyebrow">Почему это важно</span>
-        <h2>Животные остаются одни внезапно</h2>
-        <p class="lead">Беда редко предупреждает заранее. Близким в этот момент тяжело, а питомцу нужен корм, лечение и тёплое место уже сегодня.</p>
+        <h2 id="why-title">Животные остаются <span class="it">одни внезапно</span></h2>
       </div>
-      <div class="cases">
-        <div class="case"><i class="dot"></i><h3>Смерть владельца</h3><p>Родственники живут далеко или не могут взять животное к себе.</p></div>
-        <div class="case"><i class="dot"></i><h3>Тяжёлая болезнь</h3><p>Хозяин больше не справляется с уходом и прогулками.</p></div>
-        <div class="case"><i class="dot"></i><h3>Госпитализация</h3><p>Нужно срочно найти, кто присмотрит за питомцем на время лечения.</p></div>
-        <div class="case"><i class="dot"></i><h3>Исчезновение</h3><p>Соседи слышат животное за дверью и не знают, к кому обратиться.</p></div>
-        <div class="case"><i class="dot"></i><h3>Экстренный переезд</h3><p>Взять питомца с собой нельзя, а времени на поиски почти нет.</p></div>
+      <div class="why-grid">
+        <article class="why-card"><h3>Смерть владельца</h3><p>Родственники далеко или не могут взять животное.</p></article>
+        <article class="why-card"><h3>Тяжёлая болезнь</h3><p>Хозяину уже не под силу уход и прогулки.</p></article>
+        <article class="why-card"><h3>Госпитализация</h3><p>Нужен кто-то, кто присмотрит за питомцем на время лечения.</p></article>
+        <article class="why-card"><h3>Исчезновение</h3><p>Соседи слышат животное за дверью и не знают, куда звонить.</p></article>
+        <article class="why-card"><h3>Экстренный переезд</h3><p>Взять с собой нельзя, а времени на поиски почти нет.</p></article>
       </div>
-      <div class="problem-note">
-        <svg aria-hidden="true"><use href="#i-meet"/></svg>
-        <p>Объявления в соцсетях быстро теряются в ленте, а приюты часто переполнены. ЛапМост собирает всё в одном месте: понятная анкета, проверенные люди и сопровождение до тех пор, пока животное не освоится.</p>
-      </div>
-    </div>
-  </section>
+      <p class="note">Объявления теряются в ленте, а приюты переполнены. <b>ЛапМост собирает всё в одном месте:</b> анкета, проверенные люди и сопровождение, пока питомец не освоится.</p>
+    </section>
 
-  <!-- 3. Как это работает -->
-  <section id="how">
-    <div class="wrap">
-      <div class="sec-head">
+    <!-- 3. Как это работает -->
+    <section class="block dark" id="how" aria-labelledby="how-title">
+      <div class="head center">
         <span class="eyebrow">Как это работает</span>
-        <h2>Шесть шагов от анкеты до нового дома</h2>
-        <p class="lead">Мы ведём заявителя и будущего хозяина по всему пути и остаёмся рядом после передачи.</p>
+        <h2 id="how-title">Шесть шагов <span class="it">до нового дома</span></h2>
       </div>
       <ol class="steps">
-        <li class="step">
-          <div class="step-top"><span class="num"></span><span class="ic"><svg class="ico"><use href="#i-form"/></svg></span></div>
-          <span class="who">Заявитель</span>
-          <h3>Заполняете анкету в боте</h3>
-          <p>Пошаговые вопросы занимают 2–5 минут.</p>
-          <div class="anketa">
-            <span><svg><use href="#i-camera"/></svg>Фото</span>
-            <span><svg><use href="#i-pass"/></svg>Ветпаспорт</span>
-            <span><svg><use href="#i-meet"/></svg>Характер</span>
-            <span><svg><use href="#i-home"/></svg>Привычки</span>
-            <span><svg><use href="#i-health"/></svg>Здоровье и уход</span>
-          </div>
-        </li>
-        <li class="step">
-          <div class="step-top"><span class="num"></span><span class="ic"><svg class="ico"><use href="#i-shield"/></svg></span></div>
-          <span class="who">Модератор</span>
-          <h3>Проверяем карточку</h3>
-          <p>Модератор сверяет данные и фото, уточняет детали и готовит карточку к публикации.</p>
-        </li>
-        <li class="step">
-          <div class="step-top"><span class="num"></span><span class="ic"><svg class="ico"><use href="#i-grid"/></svg></span></div>
-          <span class="who">Платформа</span>
-          <h3>Публикуем в каталоге</h3>
-          <p>Карточку видят кандидаты по всей стране с фильтрами по региону, виду, возрасту и совместимости.</p>
-        </li>
-        <li class="step">
-          <div class="step-top"><span class="num"></span><span class="ic"><svg class="ico"><use href="#i-people"/></svg></span></div>
-          <span class="who">Кандидаты</span>
-          <h3>Подбираем людей</h3>
-          <p>Кандидаты проходят анкетирование, и мы передаём заявителю тех, кто подходит питомцу.</p>
-        </li>
-        <li class="step">
-          <div class="step-top"><span class="num"></span><span class="ic"><svg class="ico"><use href="#i-doc"/></svg></span></div>
-          <span class="who">Вместе</span>
-          <h3>Знакомство и договор</h3>
-          <p>Помогаем организовать встречу и оформить договор передачи животного.</p>
-        </li>
-        <li class="step">
-          <div class="step-top"><span class="num"></span><span class="ic"><svg class="ico"><use href="#i-cal"/></svg></span></div>
-          <span class="who">Платформа</span>
-          <h3>Проверяем, как дела</h3>
-          <p>Через 2 недели и через 3 месяца узнаём, как животное освоилось на новом месте.</p>
-        </li>
+        <li class="step"><div class="step-top"><span class="step-num" aria-hidden="true"></span><span class="role">Заявитель</span></div><h3>Заполняете анкету в боте</h3><p>2–5 минут: фото, ветпаспорт, характер, привычки, здоровье.</p></li>
+        <li class="step"><div class="step-top"><span class="step-num" aria-hidden="true"></span><span class="role">Модератор</span></div><h3>Проверяем карточку</h3><p>Сверяем данные и фото, уточняем детали.</p></li>
+        <li class="step"><div class="step-top"><span class="step-num" aria-hidden="true"></span><span class="role">Платформа</span></div><h3>Публикуем карточку</h3><p>Её видят кандидаты по всей стране.</p></li>
+        <li class="step"><div class="step-top"><span class="step-num" aria-hidden="true"></span><span class="role">Кандидаты</span></div><h3>Подбираем людей</h3><p>Вы получаете только тех, кто подходит питомцу.</p></li>
+        <li class="step"><div class="step-top"><span class="step-num" aria-hidden="true"></span><span class="role">Вместе</span></div><h3>Знакомство и договор</h3><p>Помогаем со встречей и договором передачи.</p></li>
+        <li class="step"><div class="step-top"><span class="step-num" aria-hidden="true"></span><span class="role">Платформа</span></div><h3>Проверяем, как дела</h3><p>Через 2 недели и через 3 месяца после передачи.</p></li>
       </ol>
-    </div>
-  </section>
+    </section>
 
-  <!-- 5. Для кандидатов -->
-  <section id="adopt">
-    <div class="wrap split">
-      <div>
-        <span class="eyebrow">Для кандидатов</span>
-        <h2 style="margin-top:14px">Хотите взять питомца? Начните с анкеты</h2>
-        <p class="lead" style="margin-top:14px">Анкета помогает понять, кому какое животное подойдёт. Так меньше разочарований и возвратов, а знакомство проходит спокойнее.</p>
-        <ul class="checklist">
-          <li><span class="ic"><svg class="ico"><use href="#i-form"/></svg></span><div><b>Рассказываете о себе</b><span>Жильё, опыт, график, дети и другие животные дома.</span></div></li>
-          <li><span class="ic"><svg class="ico"><use href="#i-people"/></svg></span><div><b>Мы сверяем анкету с карточкой</b><span>Заявитель получает только подходящих кандидатов.</span></div></li>
-          <li><span class="ic"><svg class="ico"><use href="#i-meet"/></svg></span><div><b>Знакомитесь с питомцем</b><span>Помогаем договориться о встрече в удобном месте.</span></div></li>
-          <li><span class="ic"><svg class="ico"><use href="#i-doc"/></svg></span><div><b>Подписываете договор</b><span>Обязанности сторон и условия ухода закреплены на бумаге.</span></div></li>
-        </ul>
-        <a class="btn btn-primary" style="margin-top:28px" href="https://t.me/lapmost_bot"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg>Заполнить анкету кандидата</a>
-      </div>
-      <div class="form-card" aria-label="Пример анкеты кандидата">
-        <header><h3>Анкета кандидата</h3><small>Шаг 2 из 5</small></header>
-        <div class="field"><label for="d-home">Где будет жить питомец?</label><input class="input" id="d-home" value="Квартира, 54 м², есть балкон с сеткой" readonly></div>
-        <div class="field"><label for="d-pets">Кто ещё живёт с вами?</label><input class="input" id="d-pets" value="Дочь 9 лет, кошка Соня" readonly></div>
-        <div class="field"><label>Сколько времени питомец будет один?</label>
-          <div class="chips"><label class="chip"><input type="radio" name="d-alone" id="d-a1"><span>До 4 часов</span></label><label class="chip"><input type="radio" name="d-alone" id="d-a2" checked><span>4–8 часов</span></label><label class="chip"><input type="radio" name="d-alone" id="d-a3"><span>Больше 8</span></label></div>
+    <!-- 4. Для кандидатов -->
+    <section class="block light" id="take" aria-labelledby="take-title">
+      <div class="split">
+        <div class="split-text">
+          <div class="head">
+            <span class="eyebrow">Для кандидатов</span>
+            <h2 id="take-title">Хотите взять питомца? <span class="it">Начните с анкеты</span></h2>
+          </div>
+          <p class="lead">Анкета помогает понять, кому какое животное подойдёт. Так меньше разочарований, а знакомство проходит спокойнее.</p>
+          <a class="btn btn-green" href="https://t.me/lapmost_bot">Заполнить анкету кандидата</a>
         </div>
-        <div class="match"><span class="ring"><b>86%</b></span><p><b>Хорошая совместимость с Мусей.</b> Спокойная кошка, ладит с детьми и другими кошками.</p></div>
+        <div class="pink-card">
+          <ol class="check">
+            <li><b>Рассказываете о себе</b><span>Жильё, опыт, график, кто живёт дома.</span></li>
+            <li><b>Сверяем анкету с карточкой</b><span>Заявитель видит только подходящих кандидатов.</span></li>
+            <li><b>Знакомитесь с питомцем</b><span>Договоримся о встрече в удобном месте.</span></li>
+            <li><b>Подписываете договор</b><span>Условия ухода закреплены на бумаге.</span></li>
+          </ol>
+          <svg class="dog" role="img" aria-label="Собака" viewBox="0 0 200 160"><use href="#dog-head"/></svg>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 6. Передержка и волонтёры -->
-  <section class="foster" id="foster">
-    <div class="wrap">
-      <div class="sec-head">
+    <!-- 5. Передержка и волонтёры -->
+    <section class="block light" id="foster" aria-labelledby="foster-title">
+      <div class="head center">
         <span class="eyebrow">Передержка и волонтёры</span>
-        <h2>Тёплое место на время поиска</h2>
-        <p class="lead">Если животное не может оставаться дома, пока идёт поиск семьи, его можно устроить к волонтёру-передержке из нашей сети партнёров.</p>
+        <h2 id="foster-title">Тёплое место <span class="it">на время поиска</span></h2>
+        <p class="lead">Пока питомцу ищут семью, он может пожить у волонтёра из нашей сети партнёров.</p>
       </div>
       <div class="duo">
-        <div class="panel a">
-          <span class="ic"><svg class="ico"><use href="#i-home"/></svg></span>
+        <article class="duo-card dark">
           <h3>Нужна передержка</h3>
           <ul>
-            <li>Отметьте в анкете, что питомцу нужно временное жильё.</li>
+            <li>Отметьте в анкете, что нужно временное жильё.</li>
             <li>Мы подберём передержку в вашем регионе.</li>
-            <li>Карточка в каталоге получит пометку «На передержке».</li>
-            <li>Волонтёр расскажет кандидатам о характере и привычках животного.</li>
+            <li>Волонтёр расскажет кандидатам о характере питомца.</li>
           </ul>
-          <a class="btn btn-primary" href="https://t.me/lapmost_bot">Найти передержку</a>
-        </div>
-        <div class="panel b">
-          <span class="ic"><svg class="ico"><use href="#i-hand"/></svg></span>
+          <a class="btn btn-pink" href="https://t.me/lapmost_bot">Найти передержку</a>
+        </article>
+        <article class="duo-card pinky">
           <h3>Станьте волонтёром</h3>
           <ul>
             <li>Возьмите животное на время, пока ему ищут дом.</li>
             <li>Помогите с перевозкой к ветеринару или на знакомство.</li>
             <li>Проводите проверки через 2 недели и 3 месяца.</li>
-            <li>Расскажите о ЛапМосте в своём доме или районе.</li>
+            <li>Расскажите о ЛапМосте соседям.</li>
           </ul>
-          <a class="btn btn-honey" href="https://t.me/lapmost_bot">Стать волонтёром</a>
-        </div>
+          <a class="btn btn-green" href="https://t.me/lapmost_bot">Стать волонтёром</a>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 7. Проверки -->
-  <section id="followup">
-    <div class="wrap">
-      <div class="sec-head" style="margin-inline:auto;text-align:center;justify-items:center">
+    <!-- 6. После передачи -->
+    <section class="block dark" id="after" aria-labelledby="after-title">
+      <div class="head center">
         <span class="eyebrow">После передачи</span>
-        <h2>Мы не исчезаем после договора</h2>
-        <p class="lead">Две плановые проверки показывают, как животное освоилось, и помогают вовремя заметить трудности.</p>
+        <h2 id="after-title">Мы не исчезаем <span class="it">после договора</span></h2>
       </div>
-      <div class="timeline">
-        <div class="tl"><span class="day">0</span><span class="when">День передачи</span><h3>Договор и знакомство с домом</h3><p>Новый хозяин получает памятку по уходу из анкеты заявителя.</p></div>
-        <div class="tl"><span class="day">14</span><span class="when">Через 2 недели</span><h3>Первая проверка</h3><p>Спрашиваем про аппетит, сон, туалет и отношения с домочадцами. Просим пару свежих фото.</p></div>
-        <div class="tl"><span class="day">90</span><span class="when">Через 3 месяца</span><h3>Вторая проверка</h3><p>Убеждаемся, что питомец прижился, и закрываем историю передачи.</p></div>
-      </div>
-      <div class="safety-net"><svg aria-hidden="true"><use href="#i-shield"/></svg><p>Если что-то пошло не так, мы поможем советом, подключим волонтёра или найдём передержку, чтобы животное не оказалось на улице.</p></div>
-    </div>
-  </section>
+      <ol class="timeline">
+        <li class="tl"><span class="day" aria-label="День 0">0</span><small>День передачи</small><h3>Договор и знакомство с домом</h3><p>Новый хозяин получает памятку по уходу.</p></li>
+        <li class="tl"><span class="day" aria-label="День 14">14</span><small>Через 2 недели</small><h3>Первая проверка</h3><p>Аппетит, сон, туалет и пара свежих фото.</p></li>
+        <li class="tl"><span class="day" aria-label="День 90">90</span><small>Через 3 месяца</small><h3>Вторая проверка</h3><p>Убеждаемся, что питомец прижился.</p></li>
+      </ol>
+      <p class="safety"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span>Если что-то пошло не так, поможем советом, подключим волонтёра или найдём передержку. Животное не окажется на улице.</span></p>
+    </section>
 
-  <!-- 8. Доверие и безопасность -->
-  <section style="background:var(--moss)" id="trust">
-    <div class="wrap">
-      <div class="sec-head">
+    <!-- 7. Доверие и безопасность -->
+    <section class="block light" id="trust" aria-labelledby="trust-title">
+      <div class="head">
         <span class="eyebrow">Доверие и безопасность</span>
-        <h2>Каждый шаг под присмотром</h2>
+        <h2 id="trust-title">Каждый шаг <span class="it">под присмотром</span></h2>
       </div>
       <div class="trust-grid">
-        <div class="trust"><svg aria-hidden="true"><use href="#i-shield"/></svg><h3>Ручная модерация</h3><p>Каждую карточку проверяет человек до публикации в каталоге.</p></div>
-        <div class="trust"><svg aria-hidden="true"><use href="#i-people"/></svg><h3>Анкета кандидата</h3><p>Случайные люди не получают контакты заявителя.</p></div>
-        <div class="trust"><svg aria-hidden="true"><use href="#i-doc"/></svg><h3>Договор передачи</h3><p>Права и обязанности сторон закреплены письменно.</p></div>
-        <div class="trust"><svg aria-hidden="true"><use href="#i-lock"/></svg><h3>Личные данные</h3><p>Телефоны и адреса не публикуются в открытом каталоге.</p></div>
+        <article class="trust-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="m8 11 2 2 4-4"/></svg></span><h3>Ручная модерация</h3><p>Каждую карточку проверяет человек.</p></article>
+        <article class="trust-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><h3>Анкета кандидата</h3><p>Случайные люди не получают ваши контакты.</p></article>
+        <article class="trust-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 17c1.5-2 2.5-2 3.5 0s2 2 3.5 0"/></svg></span><h3>Договор передачи</h3><p>Права и обязанности закреплены письменно.</p></article>
+        <article class="trust-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><h3>Личные данные</h3><p>Телефоны и адреса не публикуются.</p></article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 9. FAQ -->
-  <section id="faq">
-    <div class="wrap faq-wrap">
-      <div class="sec-head" style="margin:0">
-        <span class="eyebrow">Вопросы</span>
-        <h2>Частые вопросы</h2>
-        <p class="lead">Не нашли ответ? Напишите в бот, и модератор ответит лично.</p>
-      </div>
-      <div>
-        <details open><summary>Кто может подать заявку?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Сам владелец, его родственники, друзья, соседи или волонтёры. Важно, чтобы вы могли рассказать о питомце и организовать знакомство с ним.</p></details>
-        <details><summary>Что делать, если у животного нет ветпаспорта?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Анкету можно заполнить и без него. Отметьте, что документов нет, и опишите, что известно о здоровье и прививках. Модератор подскажет, как оформить паспорт.</p></details>
-        <details><summary>Как вы проверяете кандидатов?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Кандидат заполняет анкету о жилье, опыте и составе семьи. Мы сопоставляем её с карточкой питомца и передаём заявителю только подходящих людей. Окончательное решение принимает заявитель.</p></details>
-        <details><summary>Можно ли передумать после знакомства?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Да, до подписания договора любая сторона может отказаться. Мы продолжим поиск и предложим других кандидатов.</p></details>
-        <details><summary>Что, если хозяин вернётся или найдётся?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Напишите в бот. Если животное ещё на передержке или в поиске, карточку снимут с публикации. Если передача уже состоялась, мы поможем сторонам договориться.</p></details>
-        <details><summary>Кто такие волонтёры-передержки?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Это люди из партнёрской сети, которые временно берут животное к себе домой, пока ему ищут постоянную семью.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 10. CTA -->
-  <section class="cta">
-    <div class="wrap">
-      <div class="cta-box">
-        <div>
-          <h2>Питомцу нужна помощь прямо сейчас?</h2>
-          <p>Откройте бот и заполните анкету. Это займёт несколько минут, а дальше мы будем рядом на каждом шаге.</p>
-          <div class="actions">
-            <a class="btn btn-honey" href="https://t.me/lapmost_bot"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg>Открыть бот в Телеграме</a>
-            <a class="btn btn-ghost" href="#adopt">Как взять питомца</a>
-          </div>
-          <span class="handle"><svg aria-hidden="true"><use href="#i-tg"/></svg>@lapmost_bot</span>
+    <!-- 8. FAQ -->
+    <section class="block light" id="faq" aria-labelledby="faq-title">
+      <div class="faq">
+        <div class="head">
+          <span class="eyebrow">Вопросы</span>
+          <h2 id="faq-title">Частые <span class="it">вопросы</span></h2>
+          <p class="lead">Не нашли ответ? Напишите в бот, модератор ответит лично.</p>
         </div>
-        <div class="cta-mark" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#logo"/></svg></div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div class="foot">
-      <div>
-        <a class="brand" href="#top"><svg aria-hidden="true"><use href="#logo"/></svg><span>Лап<b>Мост</b></span></a>
-        <p style="max-width:34ch">Помогаем питомцам, оставшимся без хозяина, найти новый дом.</p>
-        <div class="socials foot-socials">
-          <a href="https://vk.ru/club242294598" target="_blank" rel="noopener" aria-label="ЛапМост во ВКонтакте" title="ВКонтакте"><svg aria-hidden="true"><use href="#i-vk"/></svg></a>
-          <a href="https://t.me/lapmostt" target="_blank" rel="noopener" aria-label="Телеграм-канал ЛапМост" title="Телеграм-канал"><svg aria-hidden="true"><use href="#i-tg"/></svg></a>
+        <div class="faq-list">
+          <details open><summary>Кто может подать заявку?</summary><p>Сам владелец, его родственники, друзья, соседи или волонтёры. Важно, чтобы вы могли рассказать о питомце и организовать знакомство с ним.</p></details>
+          <details><summary>Что делать, если у животного нет ветпаспорта?</summary><p>Анкету можно заполнить и без него. Отметьте, что документов нет, и опишите, что известно о здоровье и прививках. Модератор подскажет, как оформить паспорт.</p></details>
+          <details><summary>Как вы проверяете кандидатов?</summary><p>Кандидат заполняет анкету о жилье, опыте и составе семьи. Мы сопоставляем её с карточкой питомца и передаём заявителю только подходящих людей. Окончательное решение принимает заявитель.</p></details>
+          <details><summary>Можно ли передумать после знакомства?</summary><p>Да, до подписания договора любая сторона может отказаться. Мы продолжим поиск и предложим других кандидатов.</p></details>
+          <details><summary>Что, если хозяин вернётся или найдётся?</summary><p>Напишите в бот. Если животное ещё на передержке или в поиске, карточку снимут с публикации. Если передача уже состоялась, мы поможем сторонам договориться.</p></details>
+          <details><summary>Кто такие волонтёры-передержки?</summary><p>Это люди из партнёрской сети, которые временно берут животное к себе домой, пока ему ищут постоянную семью.</p></details>
         </div>
       </div>
-      <div><h4>Заявителям</h4><ul><li><a href="#how">Как это работает</a></li><li><a href="#foster">Передержка</a></li><li><a href="#trust">Безопасность</a></li></ul></div>
-      <div><h4>Кандидатам</h4><ul><li><a href="#adopt">Анкета кандидата</a></li><li><a href="#followup">После передачи</a></li></ul></div>
-      <div><h4>Связь</h4><ul><li><a href="https://t.me/lapmost_bot">Телеграм-бот</a></li><li><a href="https://t.me/lapmostt" target="_blank" rel="noopener">Телеграм-канал</a></li><li><a href="https://vk.ru/club242294598" target="_blank" rel="noopener">ВКонтакте</a></li><li><a href="#foster">Стать волонтёром</a></li><li><a href="#faq">Вопросы</a></li></ul></div>
+    </section>
+
+    <!-- 9. CTA -->
+    <section class="block dark cta" aria-labelledby="cta-title">
+      <div class="cta-text">
+        <h2 id="cta-title">Питомцу нужна помощь <span class="it">прямо сейчас?</span></h2>
+        <p class="lead">Откройте бот и заполните анкету. Это займёт несколько минут, а дальше мы будем рядом.</p>
+        <div class="cta-actions">
+          <a class="btn btn-pink" href="https://t.me/lapmost_bot"><svg aria-hidden="true"><use href="#tg"/></svg>Открыть бот в Телеграме</a>
+          <span class="handle">@lapmost_bot</span>
+        </div>
+      </div>
+      <div class="pets">
+        <svg role="img" aria-label="Кошка" viewBox="0 0 200 160"><use href="#cat-head"/></svg>
+        <svg role="img" aria-label="Собака" viewBox="0 0 200 160"><use href="#dog-head"/></svg>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <a class="logo" href="#top"><svg aria-hidden="true"><use href="#paw"/></svg>ЛапМост</a>
+      <p>Помогаем питомцам, оставшимся без хозяина, найти новый дом.</p>
+      <div class="socials foot-socials">
+        <a href="https://vk.ru/club242294598" target="_blank" rel="noopener" aria-label="ЛапМост во ВКонтакте" title="ВКонтакте"><svg aria-hidden="true"><use href="#i-vk"/></svg></a>
+        <a href="https://t.me/lapmostt" target="_blank" rel="noopener" aria-label="Телеграм-канал ЛапМост" title="Телеграм-канал"><svg aria-hidden="true"><use href="#tg"/></svg></a>
+      </div>
     </div>
+    <div><h4>Заявителям</h4><ul><li><a href="#how">Как это работает</a></li><li><a href="#foster">Передержка</a></li><li><a href="#trust">Безопасность</a></li></ul></div>
+    <div><h4>Кандидатам</h4><ul><li><a href="#take">Анкета кандидата</a></li><li><a href="#after">После передачи</a></li></ul></div>
+    <div><h4>Связь</h4><ul><li><a href="https://t.me/lapmost_bot">Телеграм-бот</a></li><li><a href="https://t.me/lapmostt" target="_blank" rel="noopener">Телеграм-канал</a></li><li><a href="https://vk.ru/club242294598" target="_blank" rel="noopener">ВКонтакте</a></li><li><a href="#foster">Стать волонтёром</a></li><li><a href="#faq">Вопросы</a></li></ul></div>
     <div class="legal"><span>© 2026 ЛапМост. Социальный проект.</span><span>Политика конфиденциальности</span></div>
-  </div>
-</footer>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var btn = document.querySelector('.burger');
+  var menu = document.getElementById('menu');
+  if (!btn || !menu) return;
+  function setOpen(open) {
+    menu.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+  }
+  btn.addEventListener('click', function () { setOpen(!menu.classList.contains('open')); });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('open')) { setOpen(false); btn.focus(); } });
+  document.addEventListener('click', function (e) { if (!e.target.closest('.top')) setOpen(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 1020) setOpen(false); });
+})();
+</script>
 
 </body>
 </html>
