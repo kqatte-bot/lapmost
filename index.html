@@ -39,7 +39,7 @@
   color-scheme: light;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   background: var(--page);
@@ -83,7 +83,8 @@ h3 { font-size: 20px; line-height: 1.25; letter-spacing: -0.01em; }
 .btn svg { width: 18px; height: 18px; flex: none; }
 
 /* header */
-.top { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 18px 0; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 18px 12px; margin-bottom: -12px; position: sticky; top: 0; z-index: 30; }
+.top::before { content: ""; position: absolute; inset: 0 calc(50% - 50vw); background: var(--page); z-index: -1; }
 .logo { display: inline-flex; align-items: center; gap: 12px; font-family: var(--body); font-weight: 700; font-size: 25px; line-height: 1; letter-spacing: -0.03em; color: var(--green); }
 .logo svg { width: 31px; height: 29px; flex: none; color: var(--paw); }
 .nav { display: flex; gap: 28px; font-size: 15px; font-weight: 500; }
@@ -253,7 +254,6 @@ img { max-width: 100%; }
   .menu .btn { margin-top: 14px; }
   .menu .socials { margin-top: 12px; }
   .menu .socials a { background: var(--tile-on-green); color: var(--on-green); }
-  .top { position: relative; }
 }
 @media (max-width: 680px) {
   .top-right > .btn { display: none; }
